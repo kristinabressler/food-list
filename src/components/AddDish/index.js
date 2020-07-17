@@ -4,30 +4,43 @@ export default class AddDish extends Component {
    constructor(props) {
     super(props);
     this.state = {
-        dish: ""
+        food: "",
+        ingredients: []
     };
      
     this.addDishItem = this.addDishItem.bind(this);
   }
 
-  onChange = (event) => {
-    this.setState({ dish: event.target.value });
+  onFoodChange = (event) => {
+    this.setState({ food: event.target.value });
+  }
+
+  onIngChange = (event) => {
+    this.setState({ ingredients: event.target.value});
   }
        
   addDishItem = (event) => {
     event.preventDefault();
+
     this.props.addDish(this.state);   
     this.setState({
-      dish: ""
+      food: "",
+      ingredients: []
     })
   }
 
      
   render() {
+    // console.log("ingredents list", typeof this.state.ingredients);
     return (
-      <div>
+      <div className="form-area">
       <form onSubmit={this.addDishItem}>
-        <input placeholder="Enter Dish" value={this.state.dish} onChange={this.onChange} />
+        <div className="form-group">
+          <input className="form-control" placeholder="Enter Dish" value={this.state.food} onChange={this.onFoodChange} />
+        </div>
+        <div className="form-group">
+          <textarea className="form-control" placeholder="please separate the ingredients by comma" value={this.state.ingredients} onChange={this.onIngChange}></textarea>
+        </div>
         <button type="submit" className="btn btn-primary">Add</button>
       </form>
       </div>
