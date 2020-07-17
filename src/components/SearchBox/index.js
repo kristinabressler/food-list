@@ -16,7 +16,7 @@ export default class SearchBox extends Component {
       <div className="search-area">
         <form>
         <div className="form-group">
-          <input type="text" className="input search-bar form-control" name="search" placeholder="Search..." value={this.props.searchInput} onChange={this.searchChange} />
+          <input type="text" className="input search-bar form-control" name="search" placeholder="Search by ingredients..." value={this.props.searchInput} onChange={this.searchChange} />
         </div>
         </form>
       </div>
