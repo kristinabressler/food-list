@@ -18,7 +18,6 @@ class App extends Component {
 
   searchChange = (filterText) => {
     this.setState({
-      // filtered: newList,
       searchInput: filterText
     });
   }
@@ -36,12 +35,18 @@ class App extends Component {
   }
 
   showFood = () =>{
+    let currentArr = [...this.state.filtered];
 
-    this.props.filtered.map((eachFood, index) => {
-      const lc = eachFood.ingredients.map(ingredient => ingredient.toLowerCase());
-      const filter = this.state.searchInput.toLowerCase();
+    const filter = this.state.searchInput.toLowerCase();
+    
+    if(filter !== "") {
+       currentArr = currentArr.filter((d) => {
+        let lc = d.ingredients.map((ing) => ing.toLowerCase());
+        return lc.includes(filter)
+      })
+    }
 
-      if (this.state.searchInput === "") {
+    return currentArr.map((eachFood, index) => {
         return(
           <DishBox
           key={index}
@@ -50,16 +55,6 @@ class App extends Component {
           clickToDelete={this.deleteDish.bind(index)}
           />
         );
-      } else if(lc.includes(filter)) {
-        return(
-          <DishBox
-          key={index}
-          dish={eachFood.food}
-          ingredients={eachFood.ingredients}
-          clickToDelete={this.deleteDish.bind(index)}
-          />
-        );
-      }
     });
   }
 
@@ -83,7 +78,7 @@ class App extends Component {
           <div className="container">
           <SearchBox searchInput={this.state.searchInput} searchChange={this.searchChange}/>
           <div className="food-list">
-            {this.showFood}
+            {this.showFood()}
           </div>
           <AddDish addDish={this.addDish} />
           {/* {this.state.list.map((onedish, index) => (
