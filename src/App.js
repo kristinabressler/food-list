@@ -36,32 +36,21 @@ class App extends Component {
   }
 
   showFood = () =>{
-    // return this.state.filtered.map((eachFood,index)=>{
-    //     return(
-    //     <DishBox
-    //     key={index}
-    //     dish={eachFood.food}
-    //     ingredients={eachFood.ingredients}
-    //     clickToDelete={this.deleteDish.bind(index)}
-    //       />
-    //     )
-    // })
-
-    // let currentList = [...this.state.list];
-		
-    // let newList = currentList.filter(item => {
-    //   const lc = item.ingredients.map(ingredient => ingredient.toLowerCase());
-
-    //   const filter = this.state.searchInput.toLowerCase();
-
-    //   return lc.includes(filter);
-    // });
 
     this.props.filtered.map((eachFood, index) => {
       const lc = eachFood.ingredients.map(ingredient => ingredient.toLowerCase());
       const filter = this.state.searchInput.toLowerCase();
 
-      if (eachFood.lc.includes(filter) === -1) {
+      if (this.state.searchInput === "") {
+        return(
+          <DishBox
+          key={index}
+          dish={eachFood.food}
+          ingredients={eachFood.ingredients}
+          clickToDelete={this.deleteDish.bind(index)}
+          />
+        );
+      } else if(lc.includes(filter)) {
         return(
           <DishBox
           key={index}
@@ -71,7 +60,6 @@ class App extends Component {
           />
         );
       }
-      // return (<DishBox className="food-item" item={item} key={Math.random()} />)
     });
   }
 
@@ -84,7 +72,8 @@ class App extends Component {
   }
  
   render() {
-    console.log(this.state.list);
+    // console.log("search term", this.state.searchInput);
+    console.log("json db", this.state.list);
     return (
       <div className="App">
         <header className="App-header">
