@@ -51,7 +51,10 @@ class App extends Component {
           <DishBox
           key={index}
           dish={eachFood.food}
+          isEditing = {eachFood.isEditing}
           ingredients={eachFood.ingredients}
+          pressEditBtn={this.pressEditBtn}
+          editDish={this.editDish}
           clickToDelete={this.deleteDish.bind(index)}
           />
         );
@@ -62,9 +65,29 @@ class App extends Component {
     const dishsCopy = [...this.state.list];
     dishsCopy.splice(dishIndex, 1);
     this.setState({
-      list: dishsCopy
+      list: dishsCopy,
+      filtered: dishsCopy
     })
   }
+
+  pressEditBtn = (index) => {
+    let editedCopy = [...this.state.list];
+    editedCopy[index].isEditing = true;
+    this.setState({
+      filtered: editedCopy
+    })
+  }
+
+  editDish = (index, food, ingredients) => {
+    let foodsCopy = [...this.state.list];
+    foodsCopy[index].food = food;
+    foodsCopy[index].ingredients = ingredients;
+    foodsCopy[index].isEditing = false;
+
+    this.setState({
+      filtered: foodsCopy
+    })
+  };
  
   render() {
     // console.log("search term", this.state.searchInput);
