@@ -15,7 +15,7 @@ export default class DishBox extends Component {
   render() {
     console.log(this.props.dish);
     return (
-      {isEditing ===  true ? 
+      {this.propbs.isEditing ===  true ? 
         <div className="dish-box">
         <div className="left-flex">
           <div className="food-title"><input type="text" ref={(val) => {this.props.dish = val}}  defaultValue={this.props.dish} /></div>

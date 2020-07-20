@@ -1,17 +1,14 @@
 [
   {
     "food": "Lox and Bagel",
-    "ingredients": ["lox", "bagel", "cream cheese"],
-    "isEditing": false
+    "ingredients": ["lox", "bagel", "cream cheese"]
   },
   {
     "food": "Sushi",
-    "ingredients": ["rice", "salmon"],
-    "isEditing": false
+    "ingredients": ["rice", "salmon"]
   },
   {
     "food": "Spaghetti",
-    "ingredients": ["pasta", "tomato sauce"],
-    "isEditing": false
+    "ingredients": ["pasta", "tomato sauce"]
   }
 ]

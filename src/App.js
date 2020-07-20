@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       list: fooddb,
       filtered: fooddb,
-      searchInput : ""
+      searchInput : "",
+      isEditing: false
     }
   }
 
@@ -51,7 +52,7 @@ class App extends Component {
           <DishBox
           key={index}
           dish={eachFood.food}
-          isEditing = {eachFood.isEditing}
+          isEditing = {this.state.isEditing}
           ingredients={eachFood.ingredients}
           pressEditBtn={this.pressEditBtn}
           editDish={this.editDish}
@@ -72,9 +73,9 @@ class App extends Component {
 
   pressEditBtn = (index) => {
     let editedCopy = [...this.state.list];
-    editedCopy[index].isEditing = true;
     this.setState({
-      filtered: editedCopy
+      filtered: editedCopy,
+      isEditing: true
     })
   }
 
@@ -82,10 +83,10 @@ class App extends Component {
     let foodsCopy = [...this.state.list];
     foodsCopy[index].food = food;
     foodsCopy[index].ingredients = ingredients;
-    foodsCopy[index].isEditing = false;
 
     this.setState({
-      filtered: foodsCopy
+      filtered: foodsCopy,
+      isEditing: false
     })
   };
  
