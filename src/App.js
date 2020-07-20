@@ -12,8 +12,7 @@ class App extends Component {
     this.state = {
       list: fooddb,
       filtered: fooddb,
-      searchInput : "",
-      isEditing: false
+      searchInput : ""
     }
   }
 
@@ -52,15 +51,33 @@ class App extends Component {
           <DishBox
           key={index}
           dish={eachFood.food}
-          isEditing = {this.state.isEditing}
           ingredients={eachFood.ingredients}
-          pressEditBtn={this.pressEditBtn}
-          editDish={this.editDish}
+          onChange={(e) => this.handleUpdate(e, index)}
           clickToDelete={this.deleteDish.bind(index)}
           />
         );
     });
   }
+
+  handleUpdate = (event, index) => {
+    const target = event.target;
+    const value = target.value;
+    const food = target.food;
+    const ingredients = target.ingredients;
+
+    this.setState({
+      filtered: this.state.filtered.map((item, itemIndex) => {
+        if (itemIndex === index) {
+          return {
+            ...item,
+            [food]: value,
+            [ingredients]: value
+          }
+        }
+        return item;
+      })
+    });
+  };
 
   deleteDish = (dishIndex) => {
     const dishsCopy = [...this.state.list];
@@ -70,25 +87,6 @@ class App extends Component {
       filtered: dishsCopy
     })
   }
-
-  pressEditBtn = (index) => {
-    let editedCopy = [...this.state.list];
-    this.setState({
-      filtered: editedCopy,
-      isEditing: true
-    })
-  }
-
-  editDish = (index, food, ingredients) => {
-    let foodsCopy = [...this.state.list];
-    foodsCopy[index].food = food;
-    foodsCopy[index].ingredients = ingredients;
-
-    this.setState({
-      filtered: foodsCopy,
-      isEditing: false
-    })
-  };
  
   render() {
     // console.log("search term", this.state.searchInput);
