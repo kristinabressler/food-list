@@ -62,16 +62,21 @@ class App extends Component {
   handleUpdate = (event, index) => {
     const target = event.target;
     const value = target.value;
-    const food = target.food;
-    const ingredients = target.ingredients;
+    const name = target.name;
+
+    console.log(name);
+    console.log(value);
+
+    if(name === "ingredients") {
+      return value.split(",");
+    }
 
     this.setState({
       filtered: this.state.filtered.map((item, itemIndex) => {
         if (itemIndex === index) {
           return {
             ...item,
-            [food]: value,
-            [ingredients]: value
+            [name]: value
           }
         }
         return item;
@@ -90,7 +95,7 @@ class App extends Component {
  
   render() {
     // console.log("search term", this.state.searchInput);
-    console.log("json db", this.state.list);
+    console.log("json db", this.state.filtered);
     return (
       <div className="App">
         <header className="App-header">
