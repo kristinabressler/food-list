@@ -50,39 +50,46 @@ class App extends Component {
         return(
           <DishBox
           key={index}
+          id={index}
           dish={eachFood.food}
           ingredients={eachFood.ingredients}
-          onChange={(e) => this.handleUpdate(e, index)}
+          updateDish={this.updateDish}
+          // onChange={(e) => this.handleUpdate(e, index)}
           clickToDelete={this.deleteDish.bind(index)}
           />
         );
     });
   }
 
-  handleUpdate = (event, index) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  // handleUpdate = (event, index) => {
+  //   const target = event.target;
+  //   const value = target.value;
+  //   const name = target.name;
 
-    console.log(name);
-    console.log(value);
+  //   this.setState({
+  //     filtered: this.state.filtered.map((item, itemIndex) => {
+  //       if (itemIndex === index) {
+  //         return {
+  //           ...item,
+  //           [name]: value
+  //         }
+  //       }
+  //       return item;
+  //     })
+  //   });
+  // };
 
-    if(name === "ingredients") {
-      return value.split(",");
-    }
+  updateDish = (i, food, ingredients) => {
+    let filteredCopy = [...this.state.filtered];
+    filteredCopy[i].food = food;
+    filteredCopy[i].ingredients = ingredients;
 
     this.setState({
-      filtered: this.state.filtered.map((item, itemIndex) => {
-        if (itemIndex === index) {
-          return {
-            ...item,
-            [name]: value
-          }
-        }
-        return item;
-      })
+      filtered: filteredCopy
     });
-  };
+
+  }
+
 
   deleteDish = (dishIndex) => {
     const dishsCopy = [...this.state.list];
