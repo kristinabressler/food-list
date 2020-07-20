@@ -49,8 +49,8 @@ export default class DishBox extends Component {
           {isEditing ? (<textarea name="ingredients" value={this.props.ingredients} onChange={event => this.props.onIngChange(event, index)} ></textarea>) : (<p>{this.state.ingredients.join(", ")}</p>)}
         </div>
         <div className="right-flex">
-          {isEditing ? (<button type="button" className="btn btn-success" onClick={this.handleUpdate} >Save</button>) : (<button type="button" className="btn btn-success" onClick={this.pressEditBtn(index)} >Edit</button>)}
-          <button type="button" className="btn btn-success" onClick={this.handleUpdate} >{isEditing ? "Save" : "Edit"}</button>
+          {isEditing ? (<button type="button" className="btn btn-success" onClick={this.handleUpdate} >Save</button>) 
+          : (<button type="button" className="btn btn-success" onClick={this.pressEditBtn} >Edit</button>)}
           {isEditing ? (<button type="button" className="btn btn-danger" onClick={this.cancel}>Cancel</button>) 
           : (<button type="button" className="btn btn-danger" onClick={this.props.clickToDelete}>Delete</button>)}
         </div>
