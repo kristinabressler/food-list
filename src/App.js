@@ -56,35 +56,27 @@ class App extends Component {
           updateDish={this.updateDish}
           // onChange={(e) => this.handleUpdate(e, index)}
           clickToDelete={this.deleteDish.bind(index)}
+          // clickToCancel={this.cancel(index)}
           />
         );
     });
   }
 
-  // handleUpdate = (event, index) => {
-  //   const target = event.target;
-  //   const value = target.value;
-  //   const name = target.name;
-
-  //   this.setState({
-  //     filtered: this.state.filtered.map((item, itemIndex) => {
-  //       if (itemIndex === index) {
-  //         return {
-  //           ...item,
-  //           [name]: value
-  //         }
-  //       }
-  //       return item;
-  //     })
-  //   });
-  // };
-
   updateDish = (i, food, ingredients) => {
-    let filteredCopy = [...this.state.filtered];
-    filteredCopy[i].food = food;
-    filteredCopy[i].ingredients = ingredients;
 
+    console.log("updatedIng", typeof ingredients);
+
+    const filteredCopy = [...this.state.filtered];
+    filteredCopy[i].food = food;
+
+    if(typeof ingredients === "string") {
+      filteredCopy[i].ingredients = ingredients.split(",");
+    } else {
+      filteredCopy[i].ingredients = ingredients;
+    }
+    
     this.setState({
+      list: filteredCopy,
       filtered: filteredCopy
     });
 
