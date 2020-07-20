@@ -10,6 +10,7 @@ export default class DishBox extends Component {
       isEditing: false
     }
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.pressEditBtn = this.pressEditBtn.bind(this);
   }
 
   onFoodChange = (event) => {
@@ -20,11 +21,17 @@ export default class DishBox extends Component {
     this.setState({ ingredients: event.target.value});
   }
 
+  pressEditBtn = () => {
+    this.setState(state => ({ isEditing: !state.isEditing }));
+  }
+
   handleUpdate = () => {
     // console.log("updateIndex", this.state.indexNum);
     this.props.updateDish(this.state.indexNum, this.onFoodChange, this.onIngChange);
     this.setState(state => ({ isEditing: !state.isEditing }));
   }
+
+  
 
   render() {
     const { isEditing, index } = this.state;
@@ -42,6 +49,7 @@ export default class DishBox extends Component {
           {isEditing ? (<textarea name="ingredients" value={this.props.ingredients} onChange={event => this.props.onIngChange(event, index)} ></textarea>) : (<p>{this.state.ingredients.join(", ")}</p>)}
         </div>
         <div className="right-flex">
+          {isEditing ? (<button type="button" className="btn btn-success" onClick={this.handleUpdate} >Save</button>) : (<button type="button" className="btn btn-success" onClick={this.pressEditBtn(index)} >Edit</button>)}
           <button type="button" className="btn btn-success" onClick={this.handleUpdate} >{isEditing ? "Save" : "Edit"}</button>
           {isEditing ? (<button type="button" className="btn btn-danger" onClick={this.cancel}>Cancel</button>) 
           : (<button type="button" className="btn btn-danger" onClick={this.props.clickToDelete}>Delete</button>)}
