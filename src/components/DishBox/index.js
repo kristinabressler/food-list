@@ -5,7 +5,7 @@ export default class DishBox extends Component {
     super(props);
     this.state = {
       food: this.props.dish,
-      ingredients: this.props.ingredients,
+      ingredients: this.props.ingredients.join(", "),
       indexNum: this.props.id,
       isEditing: false
     }
@@ -47,18 +47,14 @@ export default class DishBox extends Component {
 
   render() {
     const { isEditing, index } = this.state;
-    // console.log("index", this.props.id);
     return (
 
-
-
-      
         <div className="dish-box">
         <div className="left-flex">
           <div className="food-title">
           {isEditing ? (<input type="text" name="food" value={this.state.food} onChange={event => this.onFoodChange(event, index)}  />) : (<h2>{this.props.dish}</h2>)}
           </div>
-          {isEditing ? (<textarea name="ingredients" value={this.state.ingredients} onChange={event => this.onIngChange(event, index)} ></textarea>) : (<p>{this.state.ingredients.join(", ")}</p>)}
+          {isEditing ? (<textarea name="ingredients" value={this.state.ingredients} onChange={event => this.onIngChange(event, index)} ></textarea>) : (<p>{this.state.ingredients}</p>)}
         </div>
         <div className="right-flex">
           {isEditing ? (<button type="button" className="btn btn-success" onClick={this.handleUpdate} >Save</button>) 

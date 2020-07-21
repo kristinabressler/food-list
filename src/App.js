@@ -54,9 +54,7 @@ class App extends Component {
           dish={eachFood.food}
           ingredients={eachFood.ingredients}
           updateDish={this.updateDish}
-          // onChange={(e) => this.handleUpdate(e, index)}
           clickToDelete={this.deleteDish.bind(index)}
-          // clickToCancel={this.cancel(index)}
           />
         );
     });
@@ -68,12 +66,6 @@ class App extends Component {
 
     const filteredCopy = [...this.state.filtered];
     filteredCopy[i].food = food;
-
-    if(typeof ingredients === "string") {
-      filteredCopy[i].ingredients = ingredients.split(",");
-    } else {
-      filteredCopy[i].ingredients = ingredients;
-    }
     
     this.setState({
       list: filteredCopy,
@@ -93,7 +85,6 @@ class App extends Component {
   }
  
   render() {
-    // console.log("search term", this.state.searchInput);
     console.log("json db", this.state.filtered);
     return (
       <div className="App">
@@ -107,14 +98,6 @@ class App extends Component {
             {this.showFood()}
           </div>
           <AddDish addDish={this.addDish} />
-          {/* {this.state.list.map((onedish, index) => (
-                <DishBox
-                  key={index}
-                  dish={onedish.food}
-                  ingredients={onedish.ingredients}
-                  clickToDelete={this.deleteDish.bind(index)}
-                />
-              ))} */}
             </div>
         </div>
       </div>
