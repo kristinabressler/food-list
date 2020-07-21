@@ -66,6 +66,12 @@ class App extends Component {
 
     const filteredCopy = [...this.state.filtered];
     filteredCopy[i].food = food;
+
+    if(typeof ingredients === "string") {
+      filteredCopy[i].ingredients = ingredients.split(",");
+    } else {
+      filteredCopy[i].ingredients = ingredients;
+    }
     
     this.setState({
       list: filteredCopy,
